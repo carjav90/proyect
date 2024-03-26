@@ -47,7 +47,24 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
       7.2.2 Representación estacional en los periodos de 1, 3, 6, 12 meses
         -- PAra poder visualizar graficas si el cliente lo pide --
 
-      7.2.3 
+      7.2.3 Prueba de Dickey-Fuller busca determinar si una serie de tiempo es estacionaria o no . La hipótesis nula de esta prueba es que la serie de tiempo no es estacionaria.
+      -- Hacer la logica para ver si el valor de p-value es mayor a 0.05 y si es asi hacer diferencias y volver a hacer la prueba hasta que p-value < 0.05 --
+      7.2.4 Partir los datos quitando los ultimos 12 registros y dejando un df de gastosA y gastosB, ingresosA, ingresosB
+
+      7.2.5 ¿Como analizar la gráfica de ACF (autocorrelacion) y de PACF (Autocorrelación Parcial)?
+
+      7.2.6 Crear modelo SARIMAX con from statsmodels.tsa.arima_model import ARIMA
+      -- order = (q,Q,p) seasonal_order = (P,d,D,S) S es el periodo estacional que puede ser 1, 3, 6, 12 meses
+      
+      7.2.7 Entrenamiento del modelo model.fit()
+
+      7.2.8 Crear predicciones y gráficas a partir de los resultados para los datos que tenemos sin datos futuros
+
+      7.2.9 Crear columnas en df con fechas futuras para generar el pronostico desde la prediccion del modelo.
+      -- Concatenamos el df con los datos de pronostico y el df futuro sin datos
+      -- Predeccior resultados con resultados.predict()
+
+      
 
     
     
