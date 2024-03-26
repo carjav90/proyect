@@ -15,7 +15,7 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
   
   4 Dividir el JSON de GAstos e Ingresos por conceptos.
   
-    4.1 Agrupar por conceptos y periodos de pagos o cobros para saber la periocidad de dichos datos
+    4.1 Agrupar por conceptos y periodos de pagos o cobros para saber la periodicidad de dichos datos
     
   5 Generar 2 JSON sin agrupar por:
   
