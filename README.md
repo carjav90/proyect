@@ -22,6 +22,8 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
     5.1 Ingresos Fijos
     
     5.2 Ingresos Otros
+
+    5.3 Agrupar los registros por meses
     
   6 Generar 3 JSON sin agrupar por:
   
@@ -30,6 +32,24 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
     6.2 Gastos variables o inusuales
     
     6.3 Gastos a largo plazo.
+
+    5.4 Agrupar los registros por meses
+
+  7 Crear lógica de análisis
+
+    7.1 Crear el df, con las columnas correspondientes y con el index = datetime
+    -- Entrar en detalle en otro momento de los datos que tenemos que analizar y los resultados que tenemos que obtener para los posteriores modelos. --
+
+    7.2 Modelo con statsmodels para Análisis con periodos de tiempo
+    
+      7.2.1 Media movil
+
+      7.2.2 Representación estacional en los periodos de 1, 3, 6, 12 meses
+        -- PAra poder visualizar graficas si el cliente lo pide --
+
+      7.2.3 
+
+    
     
 B.- ENTORNO WEB CON DJANGO
 
