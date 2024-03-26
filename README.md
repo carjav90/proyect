@@ -40,5 +40,11 @@ B.- ENTORNO WEB CON DJANGO
   
   4 Crear nuestra lógica en Views.py
 
+  5 Representación de datos con PowerBi
+
 
 C.- VISUALIZACIÓN DE REPORTE
+
+  1 Crear PowerBi donde el cliente pueda seleccionar el algoritmo de pronóstico
+
+  2 Entorno donde se pueda elegir los periodos y datos a reportar.
