@@ -3,6 +3,7 @@ PROYECTO ANALISIS DE DATOS DE CONCILIACION BANCARIA
 ** PASOS PARA EL DESARROLLO DE LA APLICACION **
 
 A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
+
   1 Generar archivo JSON aleatorio con Gastos e Ingresos
   
   2 Desarrollar codigo para poder insertar varios archivos JSON tanto en gastos como en Ingresos
