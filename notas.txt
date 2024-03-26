@@ -1,1 +1,10 @@
+En cuanto a la base de datos, yo creo que con estas 4 se pueden resumir las opciones:
+Sqlite, pese a que sea de donde sale los archivos de las empresas convina genial con python, es ligera y es facilisima de usar.
+MySQL, (yo no lo he usado nunca pero por lo que he visto siempre es la "idonia" cuando hablamos de Python y desarrollo web
+MariaDB vale para la mismo que la de arriba, se supone que es mas intuitiva pero son iguales en cuanto a capacidad, segun he visto por internet, porque la verdad esque esta ni la conocia.
+Quizá se puede barajar MongoDB, esta si la he usado pero creo que no encaja tan bien, pero yo lo digo por si sabeis más de esto, lo mismo aportais mas datos a esto, que mis 48h de uso que le di.
 
+
+quizá se me olvida alguna, pero la que veais y acordeis a mí me vale, si mañana decidís una en claro, genial!
+
+VENGA CHAVALES QUE HAY EQUIPO DE AQUI ZALE ARGO XULOO
