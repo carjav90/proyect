@@ -50,3 +50,5 @@ Año 2018: 95377.07 (Positivo)
 Año 2022: 83818.24 (Positivo)
 
 es un beneficio alto, pero al menos es más realista XD
+
+Lo importante de esto, es que sabemos que el archivo nos vale y en un momento determinado podemos crear otro aleatorio que ajuste aun mucho más el margen. 
