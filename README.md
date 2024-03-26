@@ -62,7 +62,7 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
 
       7.2.9 Crear columnas en df con fechas futuras para generar el pronostico desde la prediccion del modelo.
       -- Concatenamos el df con los datos de pronostico y el df futuro sin datos
-      -- Predeccior resultados con resultados.predict()
+      -- Predeccior resultados con resultados.predict() para 3, 6, 12, 24
 
       
 
