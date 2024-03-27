@@ -39,4 +39,5 @@ BORJA:
  3 Instalar las dependencias necesarias en el venv
  4 Crear models.py con datos en tablas
  5 Comprobar que los datos se registran y  se pueden visualizar
+ 6 Crear panel de administrador
 
