@@ -77,13 +77,13 @@ def generar_ingresos(anio, ingresos_totales):
 
 def generar_json(ingresos):
     datos_json = {
-        "nombre_empresa": "Empresa",
-        "campos": [
-            "concepto",
-            "fecha",
-            "valor"
+        "szName": "expenses",
+        "lszFields": [
+            "szConcept",
+            "dDate",
+            "fValue"
         ],
-        "valores": [[ingreso["concepto"], ingreso["fecha"], ingreso["valor"]] for ingreso in ingresos]
+        "lkValues": [[ingreso["concepto"], ingreso["fecha"], ingreso["valor"]] for ingreso in ingresos]
     }
 
     return datos_json
@@ -105,9 +105,9 @@ def main():
 
     # Calcular la diferencia entre la cantidad proporcionada y la cantidad generada
     diferencia = ingresos_totales - len(ingresos_generados)
-    #print("La diferencia es de: ", diferencia) #prueba de suguridad para comprobar que se adapta a lo que le introduje en el input
     if diferencia != 0:
         print(f"Se agregaron {diferencia} ingresos adicionales para igualar la cantidad total.")
 
 if __name__ == "__main__":
     main()
+
