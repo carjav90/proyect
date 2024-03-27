@@ -2,10 +2,24 @@
 ------ TAREAS A REALIZAR ------
 ===============================
 
+TAREA COMÚN:
+----------------------------------------------------------------
+ 1 Esquema proyecto
+ 2 Boceto de visualiacion api
+ 3 boceto de funcionamiento de las tablas
+ 4 boceto de bases de datos con respectivos datos 
+ 5 Tipos de reportes SON EN JSON.  
+ 6 cosas que creemos que hacen falta al tares. 
+
+
 
 CARLOS:
 ----------------------------------------------------------------
-
+ 1 
+ 2 
+ 3 
+ 4 
+ 5 
 
 
 
