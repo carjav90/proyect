@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'App_analytic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'NAME': 'nombre_de_tu_base_de_datos',
         'USER': 'tu_usuario',
         'PASSWORD': 'tu_contraseña',
