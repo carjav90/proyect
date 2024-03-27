@@ -9,3 +9,7 @@ quizá se me olvida alguna, pero la que veais y acordeis a mí me vale, si maña
 
 VENGA CHAVALES QUE HAY EQUIPO DE AQUI ZALE ARGO XULOO
 (Mañana cuando yo no esté ya podeis decir tranquilamente que soy gilipollas XD "lo acepto", pero esque trabajar solo es aburrido)
+
+
+*** Activar entorno Virtual ***
+venv\Scripts\activate
