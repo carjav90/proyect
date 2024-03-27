@@ -83,6 +83,6 @@ B.- ENTORNO WEB CON DJANGO
 
 C.- VISUALIZACIÓN DE REPORTE
 
-  1 Crear PowerBi donde el cliente pueda seleccionar el algoritmo de pronóstico
+  1 Crear Entorno con Html y CSS con Script de Javascript
 
   2 Entorno donde se pueda elegir los periodos y datos a reportar.
