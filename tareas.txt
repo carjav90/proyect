@@ -12,7 +12,8 @@ CARLOS:
 
 ANTONIO:
 ----------------------------------------------------------------
-
+  1 Terminar con el código de los json
+  2 
 
 
 BORJA:
