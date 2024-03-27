@@ -3,11 +3,11 @@ import os
 import random
 from datetime import datetime, timedelta
 
-def generate_expenses():
+def generar_gastos(ano):
     expenses = []
 
     # Gastos mensuales
-    monthly_expenses = [
+    gastos_mensuales = [
         {"concept": "Luz", "day": 5, "min_value": 50, "max_value": 200},
         {"concept": "Internet", "day": 15, "value": 80},
         {"concept": "Nominas", "day": 10, "value": 19000},
@@ -15,33 +15,17 @@ def generate_expenses():
     ]
 
     # Gastos diarios
-    daily_expenses = [
-        {"concept": "Gasolina", "value": 50},
-        {"concept": "Comida", "value": 20}
-    ]
-
-    # Gastos bimensuales
-    bimonthly_expenses = [
-        {"concept": "Agua", "value": 100},
-        {"concept": "Seguro", "value": 200}
-    ]
-
-    # Gastos semestrales
-    semiannual_expenses = [
-        {"concept": "Seguro de coche", "value": 500}
-    ]
-
-    # Gastos anuales
-    annual_expenses = [
-        {"concept": "Suscripcion informatica", "value": 1000}
+    gastos_diarios = [
+        {"concept": "Gasolina", "min_value": 25, "max_value": 120},
+        {"concept": "Comida", "min_value": 10, "max_value": 30}
     ]
 
     # Generar gastos mensuales
-    current_date = datetime(2015, 1, 1)
-    end_date = datetime(2024, 12, 31)
-    while current_date <= end_date and len(expenses) < 10000:
-        for expense in monthly_expenses:
-            if current_date.day == expense["day"]:
+    current_date = datetime(ano, 1, 1)
+    end_date = datetime(ano, 12, 31)
+    while current_date <= end_date:
+        for expense in gastos_mensuales:
+            if current_date.day == expense.get("day"):
                 if "value" in expense:
                     value = expense["value"]
                 else:
@@ -50,34 +34,21 @@ def generate_expenses():
         current_date += timedelta(days=1)
 
     # Generar gastos diarios
-    current_date = datetime(2015, 1, 1)
-    while current_date <= end_date and len(expenses) < 10000:
-        for expense in daily_expenses:
-            expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": expense["value"]})
-        current_date += timedelta(days=1)
-
-    # Generar gastos bimensuales
-    current_date = datetime(2015, 1, 1)
-    while current_date <= end_date and len(expenses) < 10000:
-        for expense in bimonthly_expenses:
-            if current_date.month % 2 == 0 and current_date.day == 1:
-                expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": expense["value"]})
-        current_date += timedelta(days=1)
-
-    # Generar gastos semestrales
-    current_date = datetime(2015, 1, 1)
-    while current_date <= end_date and len(expenses) < 10000:
-        for expense in semiannual_expenses:
-            if current_date.month in [1, 7] and current_date.day == 1:
-                expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": expense["value"]})
-        current_date += timedelta(days=1)
-
-    # Generar gastos anuales
-    current_date = datetime(2015, 1, 1)
-    while current_date <= end_date and len(expenses) < 10000:
-        for expense in annual_expenses:
-            if current_date.month == 1 and current_date.day == 1:
-                expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": expense["value"]})
+    current_date = datetime(ano, 1, 1)
+    gasolina_count = 0
+    comida_count = 0
+    while current_date <= end_date:
+        for expense in gastos_diarios:
+            if expense["concept"] == "Comida":
+                if comida_count < 15:  # Distribuir aleatoriamente hasta 15 veces al mes
+                    if random.random() < 15/30:  # Probabilidad de aparición en cada día del mes
+                        expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": round(random.uniform(expense["min_value"], expense["max_value"]), 2)})
+                        comida_count += 1
+            elif expense["concept"] == "Gasolina":
+                if gasolina_count < 7:  # Distribuir aleatoriamente hasta 7 veces al mes
+                    if random.random() < 7/30:  # Probabilidad de aparición en cada día del mes
+                        expenses.append({"concept": expense["concept"], "date": current_date.strftime("%d/%m/%Y"), "value": round(random.uniform(expense["min_value"], expense["max_value"]), 2)})
+                        gasolina_count += 1
         current_date += timedelta(days=1)
 
     # Truncar la lista si excede los 10000 gastos
@@ -88,11 +59,11 @@ def generate_expenses():
 
     return expenses
 
-def generate_json():
-    expenses = generate_expenses()
+def generate_json(ano):
+    expenses = generar_gastos(ano)
 
     json_data = {
-        "szName"
+        "szName": "expenses",
         "lszFields": [
             "szConcept",
             "dDate",
@@ -110,8 +81,9 @@ def save_json_to_file(json_data, filename):
 def main():
     
     filename = input("Ingrese el nombre del archivo JSON: ")
+    ano = int(input("¿Para qué año desea que se generen los gastos? "))
 
-    json_data = generate_json()
+    json_data = generate_json(ano)
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
     file_path = os.path.join(desktop_path, f"{filename}.json")
     save_json_to_file(json_data, file_path)
