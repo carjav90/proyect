@@ -11,3 +11,4 @@ class FileJSON(models.Model):
         choice = Type.choices,
         default = Type.GASTOS
     )
+    file = models.JSONField()
