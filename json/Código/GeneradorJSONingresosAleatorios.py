@@ -10,7 +10,7 @@ def generar_ingresos(anio, ingresos_totales):
     cantidad_ingresos_mensuales = random.randint(0, ingresos_totales // 2)
     for _ in range(cantidad_ingresos_mensuales):
         ingresos.append({
-            "concepto": "Subscripción mensual",
+            "concepto": "Subscripcion mensual",
             "fecha": f"{random.randint(1, 28)}/01/{anio}",
             "valor": 50
         })
@@ -19,7 +19,7 @@ def generar_ingresos(anio, ingresos_totales):
     cantidad_ingresos_trimestrales = random.randint(0, (ingresos_totales - len(ingresos)) // 4)
     for _ in range(cantidad_ingresos_trimestrales):
         ingresos.append({
-            "concepto": "Subscripción trimestral",
+            "concepto": "Subscripcion trimestral",
             "fecha": f"{random.randint(1, 28)}/03/{anio}",
             "valor": 120
         })
@@ -28,7 +28,7 @@ def generar_ingresos(anio, ingresos_totales):
     cantidad_ingresos_semestrales = random.randint(0, (ingresos_totales - len(ingresos)) // 6)
     for _ in range(cantidad_ingresos_semestrales):
         ingresos.append({
-            "concepto": "Subscripción semestral",
+            "concepto": "Subscripcion semestral",
             "fecha": f"{random.randint(1, 28)}/06/{anio}",
             "valor": 200
         })
@@ -37,7 +37,7 @@ def generar_ingresos(anio, ingresos_totales):
     cantidad_ingresos_anuales = random.randint(0, ingresos_totales - len(ingresos))
     for _ in range(cantidad_ingresos_anuales):
         ingresos.append({
-            "concepto": "Subscripción anual",
+            "concepto": "Subscripcion anual",
             "fecha": f"{random.randint(1, 28)}/01/{anio}",
             "valor": 350
         })
@@ -64,7 +64,7 @@ def generar_ingresos(anio, ingresos_totales):
         numero_articulo = random.choice(numeros_articulos)
         valor = valores_articulos[f"articulo{numero_articulo}"]
         ingresos.append({
-            "concepto": f"Artículo {numero_articulo}",
+            "concepto": f"Articulo {numero_articulo}",
             "fecha": f"{random.randint(1, 28)}/{random.randint(1, 12)}/{anio}",
             "valor": valor
         })
