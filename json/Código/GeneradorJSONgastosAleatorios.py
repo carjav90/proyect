@@ -89,6 +89,9 @@ def main():
     save_json_to_file(json_data, file_path)
     print(f"Archivo JSON guardado en el escritorio como '{filename}.json'")
 
+    total_gastos = sum(expense[2] for expense in json_data["lkValues"])  # Acceder al tercer elemento de cada lista
+    print(f"El total de todos los gastos es: {total_gastos}")
+
 if __name__ == "__main__":
     main()
 
