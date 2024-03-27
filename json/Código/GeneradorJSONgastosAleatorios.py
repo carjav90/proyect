@@ -88,11 +88,11 @@ def generate_expenses():
 
     return expenses
 
-def generate_json(json_type):
-    expenses = generate_expenses(json_type)
+def generate_json():
+    expenses = generate_expenses()
 
     json_data = {
-        "szName": json_type,
+        "szName"
         "lszFields": [
             "szConcept",
             "dDate",
@@ -108,10 +108,10 @@ def save_json_to_file(json_data, filename):
         json.dump(json_data, f, indent=4)
 
 def main():
-    json_type = input("Ingrese el nombre del tipo de JSON: ")
+    
     filename = input("Ingrese el nombre del archivo JSON: ")
 
-    json_data = generate_json(json_type)
+    json_data = generate_json()
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
     file_path = os.path.join(desktop_path, f"{filename}.json")
     save_json_to_file(json_data, file_path)
