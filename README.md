@@ -78,7 +78,7 @@ B.- ENTORNO WEB CON DJANGO
   
   4 Crear nuestra lógica en Views.py
 
-  5 Representación de datos con PowerBi
+  5 Representación de datos
 
 
 C.- VISUALIZACIÓN DE REPORTE
@@ -86,3 +86,4 @@ C.- VISUALIZACIÓN DE REPORTE
   1 Crear Entorno con Html y CSS con Script de Javascript
 
   2 Entorno donde se pueda elegir los periodos y datos a reportar.
+
