@@ -15,11 +15,11 @@ TAREA COMÚN:
 
 CARLOS:
 ----------------------------------------------------------------
- 1 
- 2 
- 3 
- 4 
- 5 
+ 1 Diseñar en papel una idea de como va a ser la web
+ 2 Diseñar en papel como va a ser la visulaizacion sin ser usuario
+ 3 Como va a ser la visualizacion siendo usuario
+ 4 crear plantillas css y .html
+ 
 
 
 
@@ -28,6 +28,7 @@ ANTONIO:
 ----------------------------------------------------------------
   1 Terminar con el código de los json
   2 
+
 
 
 BORJA:
