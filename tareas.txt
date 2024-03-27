@@ -19,9 +19,9 @@ ANTONIO:
 BORJA:
 ----------------------------------------------------------------
 *** Base de datos En Sql server ***
- 1 Se encarga Borja de configurar la base de datos 
+ 1 Configurar la base de datos 
  2 Implementarla en django
  3 Instalar las dependencias necesarias en el venv
  4 Crear models.py con datos en tablas
- 5s Comprobar que los datos se registran y  se pueden visualizar
+ 5 Comprobar que los datos se registran y  se pueden visualizar
 
