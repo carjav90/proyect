@@ -1,11 +1,1 @@
-El archivo de salida JSON, es para que un cliente lo guarde en un archivo solo legible entrando en nuestra web.
-Nuestra Api solo  genera y analiza datos en modo pago.
-Pero volver a ver sus archivos se puede hacer de forma gratuita. 
 
-
-Esto es importante, puesto que con esto, no tenemos porque almacenar los datos del cliente, en nuestra base de datos mas de un periodo
-que estimemos oportuno de tiempo.
-
-++++Nota para Borja ++++
-
-Sabiendo esto, cuando diseñes la base de datos, ponle un periodo de almacenamiento maximo de tiempo (el que consideres oportuno, quiza, no lo necesitemos más de 1 año por ejemplo)

@@ -26,9 +26,9 @@ CARLOS:
 
 ANTONIO:
 ----------------------------------------------------------------
-  1 Terminar con el código de los json
+  1 Terminar con el código de los json FALTARIA PRUEBA DE ERRORES, ESTIO, METERLE STRING EN VEZ DE NUMEROS PERO ES REALMENTE NECESARIO?
   2 Arreglar gastos y crear los 4 archivios HECHO!
-  3 Arreglar ingresos y crear los 4 archivos ---aún tiene un error
+  3 Arreglar ingresos y crear los 4 archivos HECHO!
 
 
 
