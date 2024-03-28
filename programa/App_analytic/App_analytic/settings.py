@@ -70,7 +70,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'App_analytic.wsgi.application'
 
 
-# Database
+# CONFIGURACION SQLITE3
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Crear base de datos con Sqlite3
@@ -81,13 +81,14 @@ WSGI_APPLICATION = 'App_analytic.wsgi.application'
 #     }
 # }
 
+# CONFIGURACION SQL SERVER
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'nombre_de_tu_base_de_datos',
-        'USER': 'tu_usuario',
-        'PASSWORD': 'tu_contraseña',
-        'HOST': 'tu_servidor_sql_server',
+        'NAME': 'IMPACTWARE',
+        'USER': 'sa',
+        'PASSWORD': 'Impactware2024',
+        'HOST': 'TRABAJO\SQLEXPRESS',
         'PORT': '',
 
         'OPTIONS': {
