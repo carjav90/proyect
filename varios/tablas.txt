@@ -1,16 +1,16 @@
-| Id_user | Fecha Registro | Fecha Baja | Tipo de Subscripción | Fecha Inicio Subscripción | End-Subscripción | Nombre  | Apellido1 | Apellido2 | Dirección | Teléfono | Email | Ciudad | País | Población | Código Postal | Password | Activo |
+| Id_user | Fecha Registro | Fecha Baja | Tipo de Subscripción | Fecha Inicio Subscripción | End-Subscripción  | Nombre  | Apellido1 | Apellido2 | Dirección | Teléfono | Email | Ciudad | País | Población | Código Postal | Password | Activo |
 |---------|----------------|------------|----------------------|---------------------------|-------------------|---------|-----------|-----------|-----------|----------|-------|--------|------|-----------|---------------|----------|--------|
 | 1       | 28-mar         |            | 4                    | 28-mar                    | 27/03/2025        | Antonio | Lopez     | Rodriguez | x         | 6666     |       |        |      |           |               |          | true   |
 
 
 
 
-| Fecha de Ingreso | Id_Insertados | Id Usuario | Nombre Archivo    | Id_Tipo | Fecha Creación | Id_Generado | Nombre Archivo | Id_Tipo |
-|------------------|---------------|------------|-------------------|---------|----------------|-------------|----------------|---------|
-| 28-mar           | 1             | 1          | ingresos2020.json | 1       | 28-mar         | 1           | ingresos.json  | 2       |
-| 28-mar           | 2             | 1          | ingresos2021.json | 1       | 28-mar         | 2           | gastos.json    | 6       |
-| 28-mar           | 3             | 1          | gastos2020.json  | 4       | 28-mar         | 3           | in_agrupados.json | 8     |
-| 28-mar           | 4             | 1          | gastos2021.json  | 4       | 28-mar         | 4           | gas_agrupados.json | 9     |
+| Fecha de Ingreso | Id_Insertados | Id Usuario | Nombre Archivo    | Id_Tipo | Fecha Creación | Id_Generado | Nombre Archivo     | Id_Tipo |
+|------------------|---------------|------------|-------------------|---------|----------------|-------------|----------------    |---------|
+| 28-mar           | 1             | 1          | ingresos2020.json | 1       | 28-mar         | 1           | ingresos.json      | 2       |
+| 28-mar           | 2             | 1          | ingresos2021.json | 1       | 28-mar         | 2           | gastos.json        | 6       |
+| 28-mar           | 3             | 1          | gastos2020.json   | 4       | 28-mar         | 3           | in_agrupados.json  | 8       |
+| 28-mar           | 4             | 1          | gastos2021.json   | 4       | 28-mar         | 4           | gas_agrupados.json | 9       |
 
 
 | Id_Sub | Modelo Subscripción | Precio | Activo |
@@ -22,17 +22,17 @@
 
 
 
-| Id_Tipo | Tipo             | Tipo de Estudio | Id_Estudio | Nombre                |
-|---------|------------------|-----------------|------------|-----------------------|
-| 1       | Ingresos         | 1               | Regresion logistica |                       |
-| 2       | Ingresos Fijos   | 2               | Arboles de decision |                       |
-| 3       | Ingresos Variables | 3               | Random Forest |                       |
-| 4       | Gastos           | 4               | Sarimax    |                       |
-| 5       | Gastos Fijos     |                 |            |                       |
-| 6       | Gastos Variables |                 |            |                       |
-| 7       | Gastos a largo plazo |             |            |                       |
-| 8       | Ingreso Agrupado |                 |            |                       |
-| 9       | Gasto Agrupado   |                 |            |                       |
+| Id_Tipo | Tipo                 | Tipo de Estudio | Id_Estudio          | Nombre                |
+|---------|------------------    |-----------------|------------         |-----------------------|
+| 1       | Ingresos             | 1               | Regresion logistica |                       |
+| 2       | Ingresos Fijos       | 2               | Arboles de decision |                       |
+| 3       | Ingresos Variables   | 3               | Random Forest       |                       |
+| 4       | Gastos               | 4               | Sarimax             |                       |
+| 5       | Gastos Fijos         |                 |                     |                       |
+| 6       | Gastos Variables     |                 |                     |                       |
+| 7       | Gastos a largo plazo |                 |                     |                       |
+| 8       | Ingreso Agrupado     |                 |                     |                       |
+| 9       | Gasto Agrupado       |                 |                     |                       |
 
 
 
