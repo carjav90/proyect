@@ -82,20 +82,20 @@ WSGI_APPLICATION = 'App_analytic.wsgi.application'
 # }
 
 # CONFIGURACION SQL SERVER
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'IMPACTWARE',
-        'USER': 'sa',
-        'PASSWORD': 'Impactware2024',
-        'HOST': 'TRABAJO\SQLEXPRESS',
-        'PORT': '',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'IMPACTWARE',
+#         'USER': 'sa',
+#         'PASSWORD': 'Impactware2024',
+#         'HOST': 'TRABAJO\SQLEXPRESS',
+#         'PORT': '',
 
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
-    }
-}
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',
+#         },
+#     }
+# }
 
 
 # Password validation
@@ -138,3 +138,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_BASE_URL = "HTTPS://mosquito-wise-repeatedly.ngrok-free.app"
+# API_KEY = "Clave de la api"

@@ -1,19 +1,16 @@
 from django.http import JsonResponse
 from .models import FileJSON
 import json
+from django.shortcuts import render
 
-# Cargar aarchivo Json
+# Importacion de las funciones de API
+from .api import obtener_datos, enviar_datos
 
-# def update_json(request):
-#     if request.method == "POST":
-#         try:
-#             data = json.loads(request.body)
-#             file_new = FileJSON(archivo = data)
-#             file_new.save()
-#             return JsonResponse({"mensaje": "Archivo cargado con exito"}, status = 201)
-#         except json.JSONDecodeError:
-#             return JsonResponse({"error": "Formato Json inválido"}, status = 400)
-#     return JsonResponse({"error": "Método no permitido"}, status = 405)
+def mi_vista(request):
+    datos = obtener_datos()
+
+    return render(request, "plantilla.html", {"datos":datos})
+
 
 
 

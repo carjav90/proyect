@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from analytic_app.views import mi_vista
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('inicio', mi_vista, name="mi-vista"),
     # path('/App_analytic',include("App_analytic.urls")),
 ]
