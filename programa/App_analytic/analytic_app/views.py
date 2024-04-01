@@ -44,7 +44,9 @@ def mi_vista(request):
         # print("El valor de la suma de fValue es:", suma)
     return render(request, "plantilla.html", context)
 
-
+def prueba_envio(request):
+    resultado = enviar_datos()
+    return render(request, 'tu_plantilla.html', {'resultado': resultado})
 
 
 
