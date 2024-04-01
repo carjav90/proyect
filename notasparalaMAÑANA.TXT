@@ -1,0 +1,16 @@
+
+Chicos, he abierto el visualizador, estoy ahora intentando modificarlo. Lo que he hecho ha sido correr un Django desde 0, lo he corrido 1 vez,
+para crear la base de datos que crea el propio Django, lo me cerrado el visual y he copiado y pegado las otras carpetas.
+lo he abierto, he instalado -r requirements y listo, ya corre la nueva ahora voy a ver si entiendo bien como cambiarle la visibilidad
+
+vale, he descubierto varias cosas,en primer lugar editar esa web es una mierda:
+por partes lo generico en dz.py es verdad que al cambiar los logo o imagenes no consigo que se visualicen bien, seguire investigando. 
+
+luego logicamente tiene un templates/jiade y un .css generico ademas de algunos individuales
+
+digo que es super dificil de editar porque tiene mucho boostrapp o como se escriba
+
+y son además lo que es manual es un troncho de 72 años de código he estado media tarde viendo de donde salían las cosas y buaf, se pueden tocar cosas
+pero es jodido
+
+es verdad que tema columnas y casillas no es un problema, pero la dinamica va a ser basicamente esa
