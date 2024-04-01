@@ -29,7 +29,9 @@ def mi_vista(request):
 
         df.set_index("date", inplace=True)
         df = df.drop(columns='dDate')
+        # suma = df["fValue"].sum()
         print(df)
+        # print("El valor de la suma de fValue es:", suma)
     return render(request, "plantilla.html", context)
 
 
