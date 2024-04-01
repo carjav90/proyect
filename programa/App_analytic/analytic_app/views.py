@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 import json
+from io import StringIO
 from datetime import datetime
 import pandas as pd
 from django.shortcuts import render
@@ -21,7 +22,8 @@ def mi_vista(request):
         
 
         datos_json = json.dumps(datos)
-        df = pd.read_json(datos_json)
+        datos_json_io = StringIO(datos_json)
+        df = pd.read_json(datos_json_io)
         # Extraer la clave 'date' de cada diccionario en la columna 'dDate'
         df['date'] = df['dDate'].apply(lambda x: x['date'])
         # Convertir las fechas a formato datetime, si no lo están
@@ -34,7 +36,7 @@ def mi_vista(request):
         suma = round(df['fValue'].sum(), 2)
         print(df)
 
-        # COntar nº de registros
+        # Contar nº de registros
         count = df["szConcept"].count()
         context = {"Description": datos,
                    "Resultado_Suma": suma,
@@ -42,7 +44,9 @@ def mi_vista(request):
         # print("El valor de la suma de fValue es:", suma)
     return render(request, "plantilla.html", context)
 
-
+def prueba_envio(request):
+    resultado = enviar_datos()
+    return render(request, 'tu_plantilla.html', {'resultado': resultado})
 
 
 
