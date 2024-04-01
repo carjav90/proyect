@@ -18,7 +18,7 @@ def mi_vista(request):
             # Asegúrate de que desc['dDate']['date'] sea una cadena de fecha válida.
             fecha = datetime.strptime(desc['dDate']['date'], '%Y-%m-%d %H:%M:%S.%f')
             desc['dDate']['date'] = fecha.strftime('%Y-%m-%d')  # Formato simplificado, cambia según necesites.
-        context = {"Description": datos}
+        
 
         datos_json = json.dumps(datos)
         df = pd.read_json(datos_json)
@@ -29,8 +29,16 @@ def mi_vista(request):
 
         df.set_index("date", inplace=True)
         df = df.drop(columns='dDate')
-        # suma = df["fValue"].sum()
+
+        # Suma de la columna fValue y redondeo de a 2 decimales
+        suma = round(df['fValue'].sum(), 2)
         print(df)
+
+        # COntar nº de registros
+        count = df["szConcept"].count()
+        context = {"Description": datos,
+                   "Resultado_Suma": suma,
+                   "n_de_registros": count}
         # print("El valor de la suma de fValue es:", suma)
     return render(request, "plantilla.html", context)
 
