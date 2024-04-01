@@ -1,2 +1,7 @@
 *** Activar entorno Virtual ***
 venv\Scripts\activate
+
+
+Chicos, he abierto el visualizador, estoy ahora intentando modificarlo. Lo que he hecho ha sido correr un Django desde 0, lo he corrido 1 vez,
+para crear la base de datos que crea el propio Django, lo me cerrado el visual y he copiado y pegado las otras carpetas.
+lo he abierto, he instalado -r requirements y listo, ya corre la nueva ahora voy a ver si entiendo bien como cambiarle la visibilidad
