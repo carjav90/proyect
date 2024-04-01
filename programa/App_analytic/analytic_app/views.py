@@ -34,7 +34,7 @@ def mi_vista(request):
         suma = round(df['fValue'].sum(), 2)
         print(df)
 
-        # COntar nº de registros
+        # Contar nº de registros
         count = df["szConcept"].count()
         context = {"Description": datos,
                    "Resultado_Suma": suma,
