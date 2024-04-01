@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 import json
+from io import StringIO
 from datetime import datetime
 import pandas as pd
 from django.shortcuts import render
@@ -21,7 +22,8 @@ def mi_vista(request):
         
 
         datos_json = json.dumps(datos)
-        df = pd.read_json(datos_json)
+        datos_json_io = StringIO(datos_json)
+        df = pd.read_json(datos_json_io)
         # Extraer la clave 'date' de cada diccionario en la columna 'dDate'
         df['date'] = df['dDate'].apply(lambda x: x['date'])
         # Convertir las fechas a formato datetime, si no lo están
