@@ -20,6 +20,7 @@ from analytic_app.views import mi_vista
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inicio', mi_vista, name="mi-vista"),
-    # path('/App_analytic',include("App_analytic.urls")),
+    # path('inicio', mi_vista, name="mi-vista"),
+    path('', mi_vista, name='home'),  # Esto manejará la URL raíz,
 ]
+

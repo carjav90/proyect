@@ -4,10 +4,20 @@
     <title>Mi Aplicación</title>
 </head>
 <body>
-    <h1>Datos de la API</h1>
     <!-- Aquí puedes iterar sobre los datos y mostrarlos -->
-    {% for dato in datos %}
-        <!-- Mostrar cada dato -->
-    {% endfor %}
+    {% if error %}
+        <h1>Error</h1>
+        <p>{{ error }}</p>
+    {% else %}
+        <h1>Datos de la API</h1>
+        {% for desc in Description %}
+            <p><strong>Concepto:</strong> {{ desc.szConcept }}</p>
+            <p><strong>Fecha:</strong> {{ desc.dDate.date }}</p>
+            <p><strong>Valor:</strong> {{ desc.fValue }}</p>
+            <p><strong>Tipo:</strong>Tipo: {{ desc.acType }}</p>
+            <br>
+        {% endfor %}
+    {% endif %}
+
 </body>
 </html>
