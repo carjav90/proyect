@@ -26,9 +26,8 @@ CARLOS:
 
 ANTONIO:
 ----------------------------------------------------------------
-  1 Terminar con el código de los json FALTARIA PRUEBA DE ERRORES, ESTIO, METERLE STRING EN VEZ DE NUMEROS PERO ES REALMENTE NECESARIO?
-  2 Arreglar gastos y crear los 4 archivios HECHO!
-  3 Arreglar ingresos y crear los 4 archivos HECHO!
+  1 Instalar Django y ver como instalar la nueva web HECHO
+  2 ver como modificarla IT´S COMMING
 
 
 
