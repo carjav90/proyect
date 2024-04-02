@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from analytic_app.views import mi_vista, prueba_envio
+from analytic_app.views import mi_vista, prueba_envio, prueba_envio_json
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('inicio', mi_vista, name="mi-vista"),
     path('recibir/', mi_vista, name='home'),  # Esto manejará la URL raíz,
-    path('enviar/', prueba_envio, name='envio'),  # Esto manejará la URL raíz,
+    path('enviar/', prueba_envio, name='envio'), 
+    path('enviar2/', prueba_envio_json, name='envioJson'),  
 ]
 

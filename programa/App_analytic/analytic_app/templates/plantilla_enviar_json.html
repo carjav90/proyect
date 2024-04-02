@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Archivo JSON</title>
+</head>
+<body>
+    <form action="/enviar2/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="json_file">
+        <input type="submit" value="Subir y Procesar">
+    </form>
+</body>
+</html>

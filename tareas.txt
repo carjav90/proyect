@@ -34,10 +34,10 @@ ANTONIO:
 BORJA:
 ----------------------------------------------------------------
 *** Base de datos En Sql server ***
- 1 Configurar la base de datos 
- 2 Implementarla en django
- 3 Instalar las dependencias necesarias en el venv
- 4 Crear models.py con datos en tablas
- 5 Comprobar que los datos se registran y  se pueden visualizar
+ 1 Configurar la base de datos LISTO
+ 2 Implementarla en django LISTO
+ 3 Instalar las dependencias necesarias en el venv LISTA
+ 4 Crear models.py con datos en tablas NO ES NECESARIO
+ 5 Comprobar que los datos se registran y  se pueden visualizar LISTO
  6 Crear panel de administrador
 

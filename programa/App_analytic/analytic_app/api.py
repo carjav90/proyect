@@ -39,4 +39,15 @@ def enviar_datos(data):
     
     else:
         print("Error al enviar los datos")
-        return JsonResponse({'error': 'Error al enviar los datos'}, status = response.status_code)
+        return JsonResponse({'error': 'Error al enviar los datos'}, status = response)
+    
+
+def enviar_datos_json(data):
+    response = requests.post(f"{settings.API_BASE_URL}/db_insert_row.php", json=data)
+    if response.status_code == 200:
+        print("Datos enviados correctamente")
+        return response.json()
+    
+    else:
+        print("Error al enviar los datos")
+        return {'error': 'Error al enviar los datos', 'status_code': response.status_code}

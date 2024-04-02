@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Importacion de las funciones de API
-from .api import obtener_datos, enviar_datos
+from .api import obtener_datos, enviar_datos, enviar_datos_json
 
 def mi_vista(request):
     datos = obtener_datos()
@@ -65,5 +65,31 @@ def prueba_envio(request):
         return enviar_datos(data)
     else:
         return render(request, "plantilla_enviar.html")
+    
+# LEEE ARCHIVO JSON Y LO INSERTA UNO A UNO EN LA API
+   
+def prueba_envio_json(request):
+    if request.method == 'POST' and request.FILES.get('json_file'):
+        # Procesar el archivo JSON subido
+        json_file = request.FILES['json_file']
+        data_json = json.load(json_file)
+        lk_values = data_json.get('lkValues', [])
 
+        responses = []
+        for valores in lk_values:
+            data = {
+                "szName": "dbDataInsert JSON",
+                "szDbName": "dbaibf",
+                "szTable": "tbDataInsert",
+                "szFields": "id_user, dInsertDate, dDate, szConcept, fValue, acType",
+                "szValues": f"{valores[0]}, '{valores[1]}', '{valores[2]}', '{valores[3]}', {valores[4]}, '{valores[5]}'"
+            }
 
+            # Llamar a la función enviar_datos para enviar 'data' a la API
+            response = enviar_datos_json(data)
+            responses.append(response)
+        return JsonResponse({'status': 'success', 'responses': responses})
+
+    elif request.method == 'GET':
+        # Mostrar el formulario para subir el archivo
+        return render(request, 'plantilla_enviar_json.html')
