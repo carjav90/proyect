@@ -1,7 +1,8 @@
+from django.http import JsonResponse
 import json
 import requests
 from django.conf import settings
-import _json
+
 
 def obtener_datos():
     data = {
@@ -31,28 +32,11 @@ def obtener_datos():
 
 
 def enviar_datos(data):
-    data = {
-    "szName": "dbtest JSON",
-    "dbName": "dbaibf",
-    "szTable": "tbDataInsert",
-    "szFields": "id, id_user, dInsertDate, dDate, szConcept, fValue, acType",
-    "jsValues": [
-        {
-            "id": 1,
-            "id_user": 1,
-            "dInsertDate": "08-04-2024",
-            "dDate": "08-04-2024",
-            "szConcept": "POSTMAN BORJa",
-            "fValue": 1025.50,
-            "acType": "0000"
-        }
-    ]
-}
     response = requests.post(f"{settings.API_BASE_URL}/db_insert_row.php", json=data)
     if response.status_code == 200:
         print("Datos enviados correctamente")
-        return response.json()
+        return JsonResponse(response.json())
     
     else:
         print("Error al enviar los datos")
-        return None
+        return JsonResponse({'error': 'Error al enviar los datos'}, status = response.status_code)

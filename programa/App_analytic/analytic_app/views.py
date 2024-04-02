@@ -4,6 +4,7 @@ from io import StringIO
 from datetime import datetime
 import pandas as pd
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Importacion de las funciones de API
 from .api import obtener_datos, enviar_datos
@@ -44,9 +45,25 @@ def mi_vista(request):
         # print("El valor de la suma de fValue es:", suma)
     return render(request, "plantilla.html", context)
 
-def prueba_envio(request):
-    resultado = enviar_datos()
-    return render(request, 'tu_plantilla.html', {'resultado': resultado})
 
+# @csrf_exempt
+def prueba_envio(request):
+    if request.method == 'POST':
+        id_user = request.POST.get('id_user')
+        dInsertDate = request.POST.get('dInsertDate')
+        dDate = request.POST.get('dDate')
+        szConcept = request.POST.get('szConcept')
+        fValue = float(request.POST.get('fValue'))
+        acType = request.POST.get('acType')
+        data = {
+            "szName": "dbDataInsert JSON",
+            "szDbName": "dbaibf",
+            "szTable": "tbDataInsert",
+            "szFields": "id_user, dInsertDate, dDate, szConcept, fValue, acType",
+            "szValues": f"{id_user}, '{dInsertDate}', '{dDate}', '{szConcept}', {fValue}, '{acType}'"
+        }
+        return enviar_datos(data)
+    else:
+        return render(request, "plantilla_enviar.html")
 
 

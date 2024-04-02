@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Envío de Datos</title>
+    <script>
+        window.onload = function() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //Enero es 0
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('dInsertDate').value = today;
+        };
+    </script>
+</head>
+<body>
+    <form action="/enviar/" method="post" id="dataForm">
+        {% csrf_token %}
+        <input type="hidden" name="szName" value="dbtest JSON">
+        <input type="hidden" name="dbName" value="dbaibf">
+        <input type="hidden" name="szTable" value="tbDataInsert">
+        <input type="hidden" name="szFields" value="id, id_user, dInsertDate, dDate, szConcept, fValue, acType">
+
+        <!-- <label for="id">ID:</label>
+        <input type="number" id="id" name="id"><br><br> -->
+
+        <label for="id_user">ID Usuario:</label>
+        <input type="number" id="id_user" name="id_user"><br><br>
+
+        <label for="dInsertDate">Fecha de Inserción:</label>
+        <input type="date" id="dInsertDate" name="dInsertDate" readonly><br><br>
+
+        <label for="dDate">Fecha:</label>
+        <input type="date" id="dDate" name="dDate"><br><br>
+
+        <label for="szConcept">Concepto:</label>
+        <input type="text" id="szConcept" name="szConcept"><br><br>
+
+        <label for="fValue">Valor:</label>
+        <input type="number" step="0.01" id="fValue" name="fValue"><br><br>
+
+        <label for="acType">Tipo de Acción:</label>
+        <input type="text" id="acType" name="acType"><br><br>
+
+        <input type="submit" value="Enviar Datos">
+    </form>
+</body>
+</html>
