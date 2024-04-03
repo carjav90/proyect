@@ -70,8 +70,8 @@ class Analyzer:
     # Método convertir conceptos del df en columnas 
     def conv_concept(self):
         if self.df is not None:
-            print(self.df.head())
+            dato = self.df.head()
+            return dato
         else:
-            print("Dataframe no esta definido")
-
+            return "Dataframe no esta definido"
     

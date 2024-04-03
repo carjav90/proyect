@@ -36,6 +36,7 @@ def reporte(request):
         analyzer = Analyzer() 
         context = analyzer.conv_json_df(datos)
         context["Dato"] = dato
+        print(analyzer.conv_concept())
               
 
         
