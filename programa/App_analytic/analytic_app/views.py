@@ -24,6 +24,7 @@ def reporte(request):
         }  
         datos = obtener_datos(data) 
 
+        # Tipo de acType
         if acType == "0001":
             dato = "Ingresos"    
         else:
