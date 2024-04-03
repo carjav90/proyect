@@ -15,7 +15,8 @@ A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
     
   3 Insertar los datos en la DBaibf en la tbDataInsert **HECHO**
   
-  4 Dividir el JSON de GAstos e Ingresos por conceptos.
+  4 Dividir el JSON de GAstos e Ingresos por conceptos. **HECHO**
+    NOTA: Los datos ya vienen separados por acType
   
     4.1 Agrupar por conceptos y periodos de pagos o cobros para saber la periodicidad de dichos datos
     

@@ -4,6 +4,7 @@ import requests
 from django.conf import settings
 
 
+
 def obtener_datos(data):
     response = requests.post(f"{settings.API_BASE_URL}/db_get_rows.php", json=data)
     print("Respuesta de la API:", response.text)
@@ -35,7 +36,7 @@ def enviar_datos(data):
         return JsonResponse({'error': 'Error al enviar los datos'}, status = response)
     
 
-async def enviar_datos_json(data):
+def enviar_datos_json(data):
     response = requests.post(f"{settings.API_BASE_URL}/db_insert_row.php", json=data)
     if response.status_code == 200:
         print("Datos enviados correctamente")

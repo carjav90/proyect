@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .api import obtener_datos, enviar_datos, enviar_datos_json
 
 # Importar funciones de nuestro archivo de funciones de análisis
-from .data_analysis_functions import conv_json_df, conv_concept
+from .data_analysis_functions import Analyzer
 
 @csrf_exempt
 def reporte(request):
@@ -32,8 +32,9 @@ def reporte(request):
             "szFields": "id, id_user, dInsertDate, dDate, szConcept, fValue, acType",
             "szWhere": f"WHERE id_user = {id_user} and acType = {acType}" # Opcion para filtrar por el acType de cada registro
         }  
-        datos = obtener_datos(data) 
-        context = conv_json_df(datos)
+        datos = obtener_datos(data)
+        analyzer = Analyzer() 
+        context = analyzer.conv_json_df(datos)
         context["Dato"] = dato
               
 
