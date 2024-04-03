@@ -9,12 +9,22 @@ from django.views.decorators.csrf import csrf_exempt
 # Importacion de las funciones de API
 from .api import obtener_datos, enviar_datos, enviar_datos_json
 
+# Importar funciones de nuestro archivo de funciones de análisis
+from .data_analysis_functions import conv_json_df, conv_concept
+
 @csrf_exempt
 def reporte(request):
     if request.method == 'POST':
         id_user = request.POST.get('id_user')
         acType = request.POST.get('acType')
+        
+        # Tipo de acType
+        if acType == "0001":
+            dato = "Ingresos"    
+        else:
+            dato = "Gastos"
 
+        # Datos a solicitar a la DB
         data = {
             "szName": "DataInsert",
             "dbName": "dbaibf",
@@ -23,63 +33,11 @@ def reporte(request):
             "szWhere": f"WHERE id_user = {id_user} and acType = {acType}" # Opcion para filtrar por el acType de cada registro
         }  
         datos = obtener_datos(data) 
+        context = conv_json_df(datos)
+        context["Dato"] = dato
+              
 
-        # Tipo de acType
-        if acType == "0001":
-            dato = "Ingresos"    
-        else:
-            dato = "Gastos"
-
-        if 'error' in datos:
-            context = {"error": datos["error"]}
-        else:
-            # Formatear las fechas antes de pasar los datos a la plantilla
-            for desc in datos:
-
-                # Convierte los datos de las ferchas a Strings para que se puedan introducir en el JSON con el resto de datos           
-                # Para 'dDate'
-                if isinstance(desc['dDate'], dict) and 'date' in desc['dDate']:
-                    fecha_str = desc['dDate']['date']
-                    fecha_obj = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M:%S.%f')
-                    desc['dDate'] = fecha_obj.strftime('%Y-%m-%d')  # Formato simplificado para 'dDate'
-                
-                # Para 'dInsertDate'
-                if isinstance(desc['dInsertDate'], dict) and 'date' in desc['dInsertDate']:
-                    fecha_insert_str = desc['dInsertDate']['date']
-                    fecha_insert_obj = datetime.strptime(fecha_insert_str, '%Y-%m-%d %H:%M:%S.%f')
-                    desc['dInsertDate'] = fecha_insert_obj.strftime('%Y-%m-%d')  # Formato simplificado para 'dInsertDate'
-            
-            # Serializacion de los datos en JSON
-            datos_json = json.dumps(datos)
-            datos_json_io = StringIO(datos_json)
-            df = pd.read_json(datos_json_io, dtype={'acType': 'str'})
-            print(df)
-            # Convertir las fechas a formato datetime, si no lo están
-            df['dDate'] = pd.to_datetime(df['dDate'])
-            df['dInsertDate'] = pd.to_datetime(df['dInsertDate'])
-
-            # Asegúrate de que las fechas estén en el formato correcto
-            df['dDate'] = df['dDate'].dt.strftime('%Y-%m-%d')
-            df['dInsertDate'] = df['dInsertDate'].dt.strftime('%Y-%m-%d')
-            df.sort_values(by="dDate", inplace = True)# Ordenar por la columna dDate
-            datos_ordenados = df.to_dict('records')
-
-            df.set_index("dDate", inplace=True)
-            # df = df.drop(columns='dDate')
-            df.sort_values(by="dDate", inplace = True)# Ordenar por la columna dDate
-            # datos_ordenados = df.to_dict("records")
-
-            # Suma de la columna fValue y redondeo de a 2 decimales
-            suma = round(df['fValue'].sum(), 2)
-            print(df)
-
-            # Contar nº de registros
-            count = df["szConcept"].count()
-            context = {"Description": datos_ordenados,
-                        "Resultado_Suma": suma,
-                        "n_de_registros": count,
-                        "Dato": dato}
-            # print("El valor de la suma de fValue es:", suma)
+        
     else:
         return render(request, "plantilla.html")
     return render(request, "plantilla.html", context)
