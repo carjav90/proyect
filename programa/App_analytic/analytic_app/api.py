@@ -4,14 +4,7 @@ import requests
 from django.conf import settings
 
 
-def obtener_datos():
-    data = {
-    "szName": "Test",
-    "dbName": "dbtest",
-    "szTable": "tbMovs",
-    "szFields": "szConcept, dDate, fValue, acType",
-    # "szWhere": "WHERE acType = '0000'" # Opcion para filtrar por el acType de cada registro
-}
+def obtener_datos(data):
     response = requests.post(f"{settings.API_BASE_URL}/db_get_rows.php", json=data)
     print("Respuesta de la API:", response.text)
     if response.status_code == 200:
@@ -30,7 +23,7 @@ def obtener_datos():
 
     }
 
-
+# 
 def enviar_datos(data):
     response = requests.post(f"{settings.API_BASE_URL}/db_insert_row.php", json=data)
     if response.status_code == 200:
@@ -42,7 +35,7 @@ def enviar_datos(data):
         return JsonResponse({'error': 'Error al enviar los datos'}, status = response)
     
 
-def enviar_datos_json(data):
+async def enviar_datos_json(data):
     response = requests.post(f"{settings.API_BASE_URL}/db_insert_row.php", json=data)
     if response.status_code == 200:
         print("Datos enviados correctamente")

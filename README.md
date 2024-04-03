@@ -4,14 +4,16 @@ PROYECTO ANALISIS DE DATOS DE CONCILIACION BANCARIA
 
 A.- INSERCCION Y MANIPULACION INICIAL DE DATOS
 
-  1 Generar archivo JSON aleatorio con Gastos e Ingresos
+  1 Generar archivo JSON aleatorio con Gastos e Ingresos **HECHO**
   
-  2 Desarrollar codigo para poder insertar varios archivos JSON tanto en gastos como en Ingresos
+  2 Desarrollar codigo para poder insertar varios archivos JSON o url en tabla tbDataInsert **HECHO**
   
-    2.1 En el entorno Web poder seleccionar que tipo de JSON es si es Gastos o Ingresos a la hora de insertar el archivo
-    -- Esto debe de ser obligatorio a la hora de insertar el archivo, si no no nos dejará insertarlo --
+    2.1 En el entorno Web poder seleccionar que tipo de JSON es si es Gastos o Ingresos a la hora de insertar el archivo. 
+    NOTA: EL JSON VIENE POR POSTMAN EN LOS DATOS O ACCEDIENDO NOSOTROS A UNA URL**. 
     
-  3 Unificar los archivos insertados en Gastos e Ingresos
+    -- Para distinguir que tipo de dato es esta el campo acType --
+    
+  3 Insertar los datos en la DBaibf en la tbDataInsert **HECHO**
   
   4 Dividir el JSON de GAstos e Ingresos por conceptos.
   

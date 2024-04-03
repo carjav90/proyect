@@ -4,24 +4,58 @@
     <title>Mi Aplicación</title>
 </head>
 <body>
+    <form action="/recibir/" method="post" id="dataForm">
+        {% csrf_token %}
+        <input type="hidden" name="szFields" value="id_user,acType">
+
+        <!-- <label for="id">ID:</label>
+        <input type="number" id="id" name="id"><br><br> -->
+
+        <label for="id_user">ID Usuario:</label>
+        <input type="number" id="id_user" name="id_user"><br><br>
+        <label for="acType">Tipo de Acción:</label>
+        <input type="text" id="acType" name="acType"><br><br>
+
+        <input type="submit" value="Enviar Datos">
+    </form>
     <!-- Aquí puedes iterar sobre los datos y mostrarlos -->
-    <h1>Suma de la columna fValue</h1>
+    <h1>Datos de: {{ Dato }}</h1>
+    <h1>Suma de la columna Valor</h1>
     <p>La suma es: {{ Resultado_Suma }}</p>
 
     <h1>Nº de registros</h1>
     <p>Total de registros: {{ n_de_registros }}</p>
+
     {% if error %}
         <h1>Error</h1>
         <p>{{ error }}</p>
     {% else %}
         <h1>Datos de la API</h1>
-        {% for desc in Description %}
-            <p><strong>Concepto:</strong> {{ desc.szConcept }}</p>
-            <p><strong>Fecha:</strong> {{ desc.dDate.date }}</p>
-            <p><strong>Valor:</strong> {{ desc.fValue }}</p>
-            <p><strong>Tipo:</strong>Tipo: {{ desc.acType }}</p>
-            <br>
-        {% endfor %}
+        <!-- Comienzo de la tabla -->
+        <table border="1"> <!-- Puedes añadir más estilo a la tabla con CSS -->
+            <!-- Encabezado de la tabla -->
+            <tr>
+                <th>-- Id --</th>
+                <th>-- Id Usuario --</th>
+                <th>-- Fecha de Inserción --</th>
+                <th>-- Fecha de Concepto --</th>
+                <th>-- Descripcion del Concepto --</th>
+                <th>-- Valor --</th>
+                <th>-- Tipo de Acción --</th>
+            </tr>
+            <!-- Filas de la tabla -->
+            {% for desc in Description %}
+                <tr>
+                    <td>{{ desc.id}}</td>
+                    <td>{{ desc.id_user }}</td>
+                    <td>{{ desc.dInsertDate}}</td>
+                    <td>{{ desc.dDate }}</td>
+                    <td>{{ desc.szConcept }}</td>
+                    <td>{{ desc.fValue }}</td>
+                    <td>{{ desc.acType }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 
 </body>
