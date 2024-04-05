@@ -133,3 +133,9 @@ class Analyzer:
         self.date_max = self.df.index.max()
         return self.date_min, self.date_max
     
+    #===========================
+    # GENERAR GRÁFICA 
+    #===========================
+    def graphic(self):
+        pass
+        

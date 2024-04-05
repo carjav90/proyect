@@ -20,88 +20,21 @@
         <input type="submit" value="Enviar Datos">
     </form>
     <!-- Aquí puedes iterar sobre los datos y mostrarlos -->
-    <h1>Datos de: {{ Dato }}</h1>
-    <h1>Periodo de Análisis entre:</h1>
-    <p> {{ Periodo_min }} y {{ Periodo_max }}</p>
-    <h1>Suma de la columna Valor</h1>
-    <p>La suma es: {{ Resultado_Suma }}</p>
+    <meta charset="UTF-8">
+    <title>Visualización de Datos</title>
+</head>
+<body>
+    <h1>Análisis de Time Series</h1>
 
-    <h1>Nº de registros</h1>
-    <p>Total de registros: {{ n_de_registros }}</p>
-
-    {% if error %}
-        <h1>Error</h1>
-        <p>{{ error }}</p>
+    {% if graphic %}
+        <h2>Gráfica de Resultados Mensuales</h2>
+        <!-- Mostrar la gráfica -->
+        <img src="data:image/png;base64,{{ graphic }}" alt="Gráfica de Resultados Mensuales">
     {% else %}
-        <h1>Datos de la API</h1>
-        <!-- Comienzo de la tabla -->
-        <table border="1"> <!-- Puedes añadir más estilo a la tabla con CSS -->
-            <!-- Encabezado de la tabla -->
-            <tr>
-                <th>-- Id --</th>
-                <th>-- Id Usuario --</th>
-                <th>-- Fecha de Inserción --</th>
-                <th>-- Fecha de Concepto --</th>
-                <th>-- Descripcion del Concepto --</th>
-                <th>-- Valor --</th>
-                <th>-- Tipo de Acción --</th>
-            </tr>
-            <!-- Filas de la tabla -->
-            {% for desc in Description %}
-                <tr>
-                    <td>{{ desc.id}}</td>
-                    <td>{{ desc.id_user }}</td>
-                    <td>{{ desc.dInsertDate}}</td>
-                    <td>{{ desc.dDate }}</td>
-                    <td>{{ desc.szConcept }}</td>
-                    <td>{{ desc.fValue }}</td>
-                    <td>{{ desc.acType }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <h1>*********************************************************</h1>
-        <h1>Datos del DataFrame Agrupados por fechas y Conceptos</h1>
-        <table border="1">
-            <!-- Encabezados de la tabla -->
-            <tr>
-                {% for column in columns %}
-                <th>{{ column }}</th>
-                {% endfor %}
-            </tr>
-
-            <!-- Filas de la tabla -->
-            {% for row in data %}
-            <tr>
-                {% for cell in row %}
-                <td>{{ cell }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
-        <h1>*********************************************************</h1>
-        <h1>Importe Total por Conceptos</h1>
-        <table border="1">
-            <!-- Encabezados de la tabla -->
-            <tr>
-                <th>-- Concepto --</th>
-                <th>-- Importe Total --</th>
-            </tr>
-
-            <!-- Filas de la tabla -->
-            {% for concepto in Conceptos %}
-        <tr>
-            <td>{{ concepto }}</td>
-            <td>
-                <!-- Muestra los importes si los indices coinciden -->
-                {% for importe in Importes %}
-                    {% if forloop.counter == forloop.parentloop.counter %}
-                        {{ importe }}
-                    {% endif %}
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-        </table>
+        <p>No hay datos para mostrar.</p>
     {% endif %}
+
+    <!-- Aquí puedes incluir otros elementos de tu página, como formularios o tablas de datos -->
+
 </body>
 </html>

@@ -3,6 +3,9 @@ import json
 from io import StringIO
 from datetime import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -44,7 +47,7 @@ from .data_analysis_functions import Analyzer
 #=========================== DATOS A MOSTRAR EN PLANTILLA.HTML ====================================
 #==================================================================================================
 @csrf_exempt
-def reporte(request, id_user=None, acType=None):
+def reporte(request, id_user=None, acType=None, as_view=True):
     if request.method == 'POST' or (id_user and acType):
         id_user = id_user or request.POST.get('id_user')
         acType = acType or request.POST.get('acType')
@@ -110,10 +113,12 @@ def reporte(request, id_user=None, acType=None):
 
 
     result_months = analyzer.expenses_for_months()
-    
+    context.update({"result_months": result_months})
 
-    return render(request, "plantilla.html", context) # Devuelve un http response
-    return result_months  # Devuelve tanto el contexto como la respuesta HTTP
+    if as_view:
+        return render(request, "plantilla.html", context) # Devuelve un http response
+    else:
+        return context  # Devuelve solo el contexto para ser utilizado por otra función
 
 #==================================================================================================
 #============================= DATOS A MOSTRAR EN ENVIAR.HTML =====================================
@@ -183,15 +188,43 @@ def envio_json(request):
 #==================================================================================================
 
 def time_series(request):
+
+    context = {}
+
     if request.method == 'POST':
         id_user = request.POST.get('id_user')
         acType = request.POST.get('acType')
+
         if id_user and acType:
-            result_months = reporte(request, id_user=id_user, acType=acType)
-            print("Datos desde vista time_series metodo\n",result_months)
+            # Llama a reporte para obtener los datos
+            datos = reporte(request, id_user=id_user, acType=acType, as_view=False)
+            
+            if 'result_months' in datos:
+                result_months = datos['result_months']
+                
+                # Aquí generarías la gráfica con los datos de result_months
+                # Suponiendo que result_months es un DataFrame con una columna 'Total' y el índice como 'Mes'
+                
+                fig, ax = plt.subplots(figsize=(8, 4))
+                result_months.plot(ax=ax)  # Asumiendo que el índice es la fecha
+                ax.set_title('Total Mensual')
+                ax.set_xlabel('Mes')
+                ax.set_ylabel('Total')
+
+                # Guardar gráfica en un buffer en formato PNG
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                plt.close(fig)  # No olvides cerrar la figura para liberar memoria
+                buffer.seek(0)
+                image_png = buffer.getvalue()
+                buffer.close()
+
+                # Convertir buffer a cadena base64 y decodificar
+                graphic = base64.b64encode(image_png).decode('utf-8')
+                context['graphic'] = graphic
+            else:
+                context['error'] = 'Datos no disponibles para generar la gráfica.'
         else:
-            # Manejar el caso cuando id_user o acType no están presentes en POST
-            # Por ejemplo, mostrando una página de error o redirigiendo a otra vista
-            return render(request, 'error_page.html')
-        
-    return render(request, 'time_series.html')
+            context['error'] = 'ID de usuario o tipo de acción faltantes.'
+    return render(request, 'time_series.html', context)
+
