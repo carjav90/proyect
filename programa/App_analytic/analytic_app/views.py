@@ -3,6 +3,8 @@ import json
 from io import StringIO
 from datetime import datetime
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Debe ser llamado antes de importar plt
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
