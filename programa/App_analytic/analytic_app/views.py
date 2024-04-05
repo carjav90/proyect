@@ -3,9 +3,11 @@ import json
 from io import StringIO
 from datetime import datetime
 import pandas as pd
+from pandas.plotting import register_matplotlib_converters
 import matplotlib
 matplotlib.use('Agg')  # Debe ser llamado antes de importar plt
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import base64
 from io import BytesIO
 from django.shortcuts import render
@@ -200,28 +202,39 @@ def time_series(request):
         if id_user and acType:
             # Llama a reporte para obtener los datos
             datos = reporte(request, id_user=id_user, acType=acType, as_view=False)
+
             
             if 'result_months' in datos:
                 result_months = datos['result_months']
-                
-                # Aquí generarías la gráfica con los datos de result_months
-                # Suponiendo que result_months es un DataFrame con una columna 'Total' y el índice como 'Mes'
-                
-                fig, ax = plt.subplots(figsize=(8, 4))
-                result_months.plot(ax=ax)  # Asumiendo que el índice es la fecha
+
+                # Convierte el índice PeriodIndex a DateTimeIndex si es necesario
+                if not isinstance(result_months.index, pd.PeriodIndex):
+                    result_months.index = pd.to_datetime(result_months.index)
+
+                print("Índice del DataFrame:", result_months.index)
+
+
+                fig, ax = plt.subplots(figsize=(14, 8))
+                result_months.plot(kind='line', ax=ax)
+
+                # # Configurar locators y formateadores para mostrar cada mes
+                # ax.xaxis.set_major_locator(mdates.MonthLocator())
+                # ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+
+                # Rotar las etiquetas del eje X a 45 grados
+                plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
+
                 ax.set_title('Total Mensual')
                 ax.set_xlabel('Mes')
                 ax.set_ylabel('Total')
 
-                # Guardar gráfica en un buffer en formato PNG
                 buffer = BytesIO()
                 plt.savefig(buffer, format='png')
-                plt.close(fig)  # No olvides cerrar la figura para liberar memoria
+                plt.close(fig)
                 buffer.seek(0)
                 image_png = buffer.getvalue()
                 buffer.close()
 
-                # Convertir buffer a cadena base64 y decodificar
                 graphic = base64.b64encode(image_png).decode('utf-8')
                 context['graphic'] = graphic
             else:
