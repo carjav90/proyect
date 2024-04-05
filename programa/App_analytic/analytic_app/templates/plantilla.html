@@ -1,6 +1,7 @@
 <!-- Ejemplo básico de una plantilla HTML -->
 <html>
 <head>
+    {% load filters %}
     <title>Mi Aplicación</title>
 </head>
 <body>
@@ -20,6 +21,8 @@
     </form>
     <!-- Aquí puedes iterar sobre los datos y mostrarlos -->
     <h1>Datos de: {{ Dato }}</h1>
+    <h1>Periodo de Análisis entre:</h1>
+    <p> {{ Periodo_min }} y {{ Periodo_max }}</p>
     <h1>Suma de la columna Valor</h1>
     <p>La suma es: {{ Resultado_Suma }}</p>
 
@@ -56,7 +59,49 @@
                 </tr>
             {% endfor %}
         </table>
-    {% endif %}
+        <h1>*********************************************************</h1>
+        <h1>Datos del DataFrame Agrupados por fechas y Conceptos</h1>
+        <table border="1">
+            <!-- Encabezados de la tabla -->
+            <tr>
+                {% for column in columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
 
+            <!-- Filas de la tabla -->
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <h1>*********************************************************</h1>
+        <h1>Importe Total por Conceptos</h1>
+        <table border="1">
+            <!-- Encabezados de la tabla -->
+            <tr>
+                <th>-- Concepto --</th>
+                <th>-- Importe Total --</th>
+            </tr>
+
+            <!-- Filas de la tabla -->
+            {% for concepto in Conceptos %}
+        <tr>
+            <td>{{ concepto }}</td>
+            <td>
+                <!-- Muestra los importes si los indices coinciden -->
+                {% for importe in Importes %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                        {{ importe }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
 </body>
 </html>

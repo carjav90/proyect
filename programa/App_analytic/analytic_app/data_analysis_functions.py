@@ -6,12 +6,18 @@ from io import StringIO
 from datetime import datetime
 import pandas as pd
 
+#==================================================================================================
+#=========================== CLASS ANALYZER CON MÉTODOS PARA NÁLISIS ==============================
+#==================================================================================================
 class Analyzer:
     def __init__(self):
         self.df = None
         self.context = {}
+        self.columns_excluir = ["id_user","dInsertDate","acType", "Total_Gasto_Diario"]
 
-    # Método que convierta los datos recuperados de SQL en df
+    #=========================================================
+    # MÉTODO CONVERTIR LOS DATOS RECUPERADOS DE SQL EN UN DF
+    #=========================================================
     def conv_json_df(self, datos):
         if 'error' in datos:
             self.context = {"error": datos["error"]}
@@ -52,8 +58,7 @@ class Analyzer:
             
             # Ordena los registros por fechas de los conceptos
             self.df.sort_values(by="dDate", inplace = True)# Ordenar por la columna dDate
-            
-
+        
             # Suma de la columna fValue y redondeo de a 2 decimales
             suma = round(self.df['fValue'].sum(), 2)
             print(self.df)
@@ -61,17 +66,40 @@ class Analyzer:
             # Contar nº de registros
             count = self.df["szConcept"].count()
             context = {"Description": datos_ordenados,
+            
                         "Resultado_Suma": suma,
                         "n_de_registros": count}
-            
             return context
 
-
-    # Método convertir conceptos del df en columnas 
+    #================================================
+    # MÉTODO CONVERTIR CONCEPTOS DE DF EN COLUMNAS
+    #================================================
     def conv_concept(self):
-        if self.df is not None:
-            dato = self.df.head()
-            return dato
-        else:
-            return "Dataframe no esta definido"
+        self.pivot_df = self.df.pivot_table(index = self.df.index, columns = 'szConcept', values = 'fValue', fill_value = 0)
+        self.df_columns_index = self.df.drop(["szConcept", "fValue", "id"], axis=1)
+        self.df_columns_index = self.df_columns_index.groupby(self.df_columns_index.index).first()
+        self.aggregated_df = self.pivot_df.groupby(self.pivot_df.index).sum()
+        self.aggregated_df = pd.merge(self.df_columns_index, self.aggregated_df, left_index=True,
+                                       right_index=True, how='left')
+        # Crear una lista de columnas para agrupar
+        self.aggregated_df["Total_Gasto_Diario"] = self.aggregated_df[[col for col in self.aggregated_df if col not in self.columns_excluir]].sum(axis=1)
+        return self.aggregated_df
+    
+    #=============================================
+    # MÉTODO AGRUPAR POR CONCEPTOS Y SUMAR TOTAL 
+    #=============================================
+    def expenses_for_concept(self):
+        # Crear una lista de columnas para agrupar
+        self.concept_df = self.aggregated_df.drop(columns = self.columns_excluir)
+        self.sum_column = self.concept_df.sum(axis=0).round(4)
+        self.result_concepts = self.sum_column.to_dict()
+        return self.result_concepts
+    
+    #===========================
+    # MÉTODO PERIODO MAX Y MIN 
+    #===========================
+    def periodo(self):
+        self.date_min = self.df.index.min()
+        self.date_max = self.df.index.max()
+        return self.date_min, self.date_max
     

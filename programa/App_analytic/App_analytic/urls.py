@@ -20,7 +20,6 @@ from analytic_app.views import reporte, envio_datos, envio_json
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('inicio', mi_vista, name="mi-vista"),
     path('recibir/', reporte, name='home'),  # Esto manejará la URL raíz,
     path('enviar/', envio_datos, name='envio'), 
     path('enviar2/', envio_json, name='envioJson'),  
