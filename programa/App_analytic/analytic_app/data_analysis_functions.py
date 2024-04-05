@@ -14,6 +14,8 @@ class Analyzer:
         self.df = None
         self.context = {}
         self.columns_excluir = ["id_user","dInsertDate","acType", "Total_Gasto_Diario"]
+        self.result_concepts = pd.DataFrame() # Df con conceptos en columnas sumados
+        self.aggregated_df = pd.DataFrame()
 
     #=========================================================
     # MÉTODO CONVERTIR LOS DATOS RECUPERADOS DE SQL EN UN DF
@@ -94,6 +96,34 @@ class Analyzer:
         self.sum_column = self.concept_df.sum(axis=0).round(4)
         self.result_concepts = self.sum_column.to_dict()
         return self.result_concepts
+    
+    #==========================================
+    # MÉTODO AGRUPAR IMPORTE TOTAL POR MESES 
+    #==========================================
+    def expenses_for_months(self):
+        # Asegurarse de que el índice es de tipo DateTimeIndex
+        if not isinstance(self.aggregated_df.index, pd.DatetimeIndex):
+            self.aggregated_df.index = pd.to_datetime(self.aggregated_df.index)
+
+        # Crear un DF con las columna acType y Total_Gasto_Diario
+        self.aggregated_df2 = self.aggregated_df[["acType", "Total_Gasto_Diario"]]
+
+        print(self.aggregated_df2.info())
+        print(self.aggregated_df2)
+        if len(self.aggregated_df2['acType'].unique()) == 1:
+            self.acType_value = self.aggregated_df2['acType'].unique()[0]
+            self.new_column_name = "Total Ingresos mensuales" if self.acType_value == "0001" else "Total Gastos mensuales"
+            self.aggregated_df2 = self.aggregated_df2.rename(columns={"Total_Gasto_Diario": self.new_column_name})
+        
+        self.aggregated_df2['Month'] = self.aggregated_df2.index.to_period('M')
+        self.monthly_totals = self.aggregated_df2.groupby('Month').sum()
+        self.monthly_totals = self.monthly_totals.drop("acType", axis=1)
+        print(self.monthly_totals)
+        # print(self.aggregated_df.info())
+        # Calcular el total mensual de gastos
+        # self.monthly_totals['Total_Mensual'] = self.monthly_totals.sum(axis=1)
+        return self.monthly_totals
+
     
     #===========================
     # MÉTODO PERIODO MAX Y MIN 

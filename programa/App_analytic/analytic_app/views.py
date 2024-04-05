@@ -78,6 +78,8 @@ def reporte(request):
         context.update({"Periodo_min": periodo_min, "Periodo_max":periodo_max})
         print(f"Periodo comprendido entre {periodo_min} y {periodo_max}")
 
+        result_months = analyzer.expenses_for_months()
+        print(result_months)
         
     else:
         context = {}
@@ -147,3 +149,41 @@ def envio_json(request):
     elif request.method == 'GET':
         # Mostrar el formulario para subir el archivo
         return render(request, 'plantilla_enviar_json.html')
+    
+
+#==================================================================================================
+#============================= DATOS A MOSTRAR EN TIME_SERIES.HTML ================================
+#==================================================================================================
+
+def time_series(request):
+    if request.method == 'POST':
+        id_user = request.POST.get('id_user')
+        acType = request.POST.get('acType')
+        
+        # Tipo de acType
+        if acType == "0001":
+            dato = "Ingresos"    
+        else:
+            dato = "Gastos"
+
+        # Datos a solicitar a la DB
+        data = {
+            "szName": "DataInsert",
+            "dbName": "dbaibf",
+            "szTable": "tbDataInsert",
+            "szFields": "id, id_user, dInsertDate, dDate, szConcept, fValue, acType",
+            "szWhere": f"WHERE id_user = {id_user} and acType = {acType}" # Opcion para filtrar por el acType de cada registro
+        } 
+
+        # Solicita los datos a api.py de nuestra Api con los parametros de data
+        datos = obtener_datos(data)
+    else:
+        return render(request, 'time_series.html')
+
+    analyzer = Analyzer()
+    context = analyzer.conv_json_df(datos)
+    context["Dato"] = dato
+
+    monthly_sum = analyzer.expenses_for_months()
+    print(monthly_sum)
+    return render(request, 'time_series.html')

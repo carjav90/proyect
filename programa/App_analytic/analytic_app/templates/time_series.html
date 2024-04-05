@@ -1,0 +1,107 @@
+<!-- Ejemplo básico de una plantilla HTML -->
+<html>
+<head>
+    {% load filters %}
+    <title>Mi Aplicación</title>
+</head>
+<body>
+    <form action="/time_series/" method="post" id="dataForm">
+        {% csrf_token %}
+        <input type="hidden" name="szFields" value="id_user,acType">
+
+        <!-- <label for="id">ID:</label>
+        <input type="number" id="id" name="id"><br><br> -->
+
+        <label for="id_user">ID Usuario:</label>
+        <input type="number" id="id_user" name="id_user"><br><br>
+        <label for="acType">Tipo de Acción:</label>
+        <input type="text" id="acType" name="acType"><br><br>
+
+        <input type="submit" value="Enviar Datos">
+    </form>
+    <!-- Aquí puedes iterar sobre los datos y mostrarlos -->
+    <h1>Datos de: {{ Dato }}</h1>
+    <h1>Periodo de Análisis entre:</h1>
+    <p> {{ Periodo_min }} y {{ Periodo_max }}</p>
+    <h1>Suma de la columna Valor</h1>
+    <p>La suma es: {{ Resultado_Suma }}</p>
+
+    <h1>Nº de registros</h1>
+    <p>Total de registros: {{ n_de_registros }}</p>
+
+    {% if error %}
+        <h1>Error</h1>
+        <p>{{ error }}</p>
+    {% else %}
+        <h1>Datos de la API</h1>
+        <!-- Comienzo de la tabla -->
+        <table border="1"> <!-- Puedes añadir más estilo a la tabla con CSS -->
+            <!-- Encabezado de la tabla -->
+            <tr>
+                <th>-- Id --</th>
+                <th>-- Id Usuario --</th>
+                <th>-- Fecha de Inserción --</th>
+                <th>-- Fecha de Concepto --</th>
+                <th>-- Descripcion del Concepto --</th>
+                <th>-- Valor --</th>
+                <th>-- Tipo de Acción --</th>
+            </tr>
+            <!-- Filas de la tabla -->
+            {% for desc in Description %}
+                <tr>
+                    <td>{{ desc.id}}</td>
+                    <td>{{ desc.id_user }}</td>
+                    <td>{{ desc.dInsertDate}}</td>
+                    <td>{{ desc.dDate }}</td>
+                    <td>{{ desc.szConcept }}</td>
+                    <td>{{ desc.fValue }}</td>
+                    <td>{{ desc.acType }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <h1>*********************************************************</h1>
+        <h1>Datos del DataFrame Agrupados por fechas y Conceptos</h1>
+        <table border="1">
+            <!-- Encabezados de la tabla -->
+            <tr>
+                {% for column in columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+
+            <!-- Filas de la tabla -->
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <h1>*********************************************************</h1>
+        <h1>Importe Total por Conceptos</h1>
+        <table border="1">
+            <!-- Encabezados de la tabla -->
+            <tr>
+                <th>-- Concepto --</th>
+                <th>-- Importe Total --</th>
+            </tr>
+
+            <!-- Filas de la tabla -->
+            {% for concepto in Conceptos %}
+        <tr>
+            <td>{{ concepto }}</td>
+            <td>
+                <!-- Muestra los importes si los indices coinciden -->
+                {% for importe in Importes %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                        {{ importe }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

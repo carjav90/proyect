@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from analytic_app.views import reporte, envio_datos, envio_json
+from analytic_app.views import reporte, envio_datos, envio_json, time_series
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recibir/', reporte, name='home'),  # Esto manejará la URL raíz,
     path('enviar/', envio_datos, name='envio'), 
     path('enviar2/', envio_json, name='envioJson'),  
+    path("time_series/", time_series, name = 'series_tiempo'),
 ]
 
